@@ -1,0 +1,992 @@
+
+organet.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000a  00800100  000004bc  00000550  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000004bc  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000145  0080010a  0080010a  0000055a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000055a  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000110  00000000  00000000  0000058a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00001074  00000000  00000000  0000069a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005ff  00000000  00000000  0000170e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000577  00000000  00000000  00001d0d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000220  00000000  00000000  00002284  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000042a  00000000  00000000  000024a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000496  00000000  00000000  000028ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000e8  00000000  00000000  00002d64  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 aa 01 	jmp	0x354	; 0x354 <__vector_11>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ec eb       	ldi	r30, 0xBC	; 188
+  7c:	f4 e0       	ldi	r31, 0x04	; 4
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 30       	cpi	r26, 0x0A	; 10
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	22 e0       	ldi	r18, 0x02	; 2
+  8c:	aa e0       	ldi	r26, 0x0A	; 10
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	af 34       	cpi	r26, 0x4F	; 79
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 5b 00 	call	0xb6	; 0xb6 <main>
+  9e:	0c 94 5c 02 	jmp	0x4b8	; 0x4b8 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <initQueue>:
+// Purpose: Initialize queue to empty.
+// Returns: void
+//--------------------------------------------
+void initQueue(queue *q)
+{
+	q->head = q->tail = -1;
+  a6:	2f ef       	ldi	r18, 0xFF	; 255
+  a8:	3f ef       	ldi	r19, 0xFF	; 255
+  aa:	fc 01       	movw	r30, r24
+  ac:	33 83       	std	Z+3, r19	; 0x03
+  ae:	22 83       	std	Z+2, r18	; 0x02
+  b0:	31 83       	std	Z+1, r19	; 0x01
+  b2:	20 83       	st	Z, r18
+  b4:	08 95       	ret
+
+000000b6 <main>:
+ */ 
+#include "organet.h"
+#include <util/delay.h>
+int main(){ 
+		
+	com_helper_init(); //initializes all four ports by calling the uart_init method with each port struct as an argument.
+  b6:	0e 94 7d 00 	call	0xfa	; 0xfa <com_helper_init>
+	sei();
+  ba:	78 94       	sei
+		if(uart_ischar(&port[0])){			//checks if the is a char to be read on port 1
+			//activate debug led.
+			
+			char x = uart_get_char(&port[0]);
+			if(x == 0x04){
+				port[0].yeah = 1;
+  bc:	cc e9       	ldi	r28, 0x9C	; 156
+  be:	d1 e0       	ldi	r29, 0x01	; 1
+  c0:	11 e0       	ldi	r17, 0x01	; 1
+	com_helper_init(); //initializes all four ports by calling the uart_init method with each port struct as an argument.
+	sei();
+	
+	while(1){
+		
+		uart_out_char(0xAA,&port[0]);
+  c2:	6b e9       	ldi	r22, 0x9B	; 155
+  c4:	71 e0       	ldi	r23, 0x01	; 1
+  c6:	8a ea       	ldi	r24, 0xAA	; 170
+  c8:	0e 94 3c 02 	call	0x478	; 0x478 <uart_out_char>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  cc:	2f ef       	ldi	r18, 0xFF	; 255
+  ce:	80 e7       	ldi	r24, 0x70	; 112
+  d0:	92 e0       	ldi	r25, 0x02	; 2
+  d2:	21 50       	subi	r18, 0x01	; 1
+  d4:	80 40       	sbci	r24, 0x00	; 0
+  d6:	90 40       	sbci	r25, 0x00	; 0
+  d8:	e1 f7       	brne	.-8      	; 0xd2 <main+0x1c>
+  da:	00 c0       	rjmp	.+0      	; 0xdc <main+0x26>
+  dc:	00 00       	nop
+		_delay_ms(50);
+		if(uart_ischar(&port[0])){			//checks if the is a char to be read on port 1
+  de:	8b e9       	ldi	r24, 0x9B	; 155
+  e0:	91 e0       	ldi	r25, 0x01	; 1
+  e2:	0e 94 45 02 	call	0x48a	; 0x48a <uart_ischar>
+  e6:	88 23       	and	r24, r24
+  e8:	61 f3       	breq	.-40     	; 0xc2 <main+0xc>
+			//activate debug led.
+			
+			char x = uart_get_char(&port[0]);
+  ea:	8b e9       	ldi	r24, 0x9B	; 155
+  ec:	91 e0       	ldi	r25, 0x01	; 1
+  ee:	0e 94 4d 02 	call	0x49a	; 0x49a <uart_get_char>
+			if(x == 0x04){
+  f2:	84 30       	cpi	r24, 0x04	; 4
+  f4:	31 f7       	brne	.-52     	; 0xc2 <main+0xc>
+				port[0].yeah = 1;
+  f6:	18 83       	st	Y, r17
+  f8:	e4 cf       	rjmp	.-56     	; 0xc2 <main+0xc>
+
+000000fa <com_helper_init>:
+#include "comhelper.h"
+
+
+
+
+void com_helper_init(){
+  fa:	cf 93       	push	r28
+  fc:	df 93       	push	r29
+	
+	/************************************************************************/
+	/* This method initializes all four connection lines.                                                                     */
+	/************************************************************************/
+	
+	initQueue(&incoming_port[0]);
+  fe:	8a e0       	ldi	r24, 0x0A	; 10
+ 100:	91 e0       	ldi	r25, 0x01	; 1
+ 102:	0e 94 53 00 	call	0xa6	; 0xa6 <initQueue>
+	initQueue(&incoming_port[1]);
+ 106:	8e e2       	ldi	r24, 0x2E	; 46
+ 108:	91 e0       	ldi	r25, 0x01	; 1
+ 10a:	0e 94 53 00 	call	0xa6	; 0xa6 <initQueue>
+	initQueue(&incoming_port[2]);
+ 10e:	82 e5       	ldi	r24, 0x52	; 82
+ 110:	91 e0       	ldi	r25, 0x01	; 1
+ 112:	0e 94 53 00 	call	0xa6	; 0xa6 <initQueue>
+	initQueue(&incoming_port[3]);
+ 116:	86 e7       	ldi	r24, 0x76	; 118
+ 118:	91 e0       	ldi	r25, 0x01	; 1
+ 11a:	0e 94 53 00 	call	0xa6	; 0xa6 <initQueue>
+	
+	
+	port_rotator = 1;				//this couldnt be done in the header file
+ 11e:	81 e0       	ldi	r24, 0x01	; 1
+ 120:	80 93 9a 01 	sts	0x019A, r24
+	
+	port[0].uartrx = PORTONERX;	//load the pins for each line.
+ 124:	32 e0       	ldi	r19, 0x02	; 2
+ 126:	30 93 a6 01 	sts	0x01A6, r19
+	port[0].uarttx = PORTONETX;
+ 12a:	23 e0       	ldi	r18, 0x03	; 3
+ 12c:	20 93 a7 01 	sts	0x01A7, r18
+	port[0].port_number = 1;
+ 130:	80 93 9b 01 	sts	0x019B, r24
+	
+	port[1].uartrx = PORTTWORX;
+ 134:	94 e0       	ldi	r25, 0x04	; 4
+ 136:	90 93 d3 01 	sts	0x01D3, r25
+	port[1].uarttx = PORTTWOTX;
+ 13a:	45 e0       	ldi	r20, 0x05	; 5
+ 13c:	40 93 d4 01 	sts	0x01D4, r20
+	port[1].port_number = 2;
+ 140:	30 93 c8 01 	sts	0x01C8, r19
+	
+	
+	port[2].uartrx = PORTTHREERX;
+ 144:	36 e0       	ldi	r19, 0x06	; 6
+ 146:	30 93 00 02 	sts	0x0200, r19
+	port[2].uarttx = PORTTHREETX;
+ 14a:	37 e0       	ldi	r19, 0x07	; 7
+ 14c:	30 93 01 02 	sts	0x0201, r19
+	port[2].port_number = 3;
+ 150:	20 93 f5 01 	sts	0x01F5, r18
+ 	
+	
+	port[3].uartrx = PORTFOURRX;		//right now, this pin is still wrong.
+ 154:	10 92 2d 02 	sts	0x022D, r1
+	port[3].uarttx = PORTFOURTX; 
+ 158:	80 93 2e 02 	sts	0x022E, r24
+	port[3].port_number = 4;
+ 15c:	90 93 22 02 	sts	0x0222, r25
+ 160:	c1 e0       	ldi	r28, 0x01	; 1
+ 162:	d0 e0       	ldi	r29, 0x00	; 0
+ 164:	01 c0       	rjmp	.+2      	; 0x168 <com_helper_init+0x6e>
+ 166:	21 96       	adiw	r28, 0x01	; 1
+ 168:	ce 01       	movw	r24, r28
+ 16a:	01 97       	sbiw	r24, 0x01	; 1
+	
+	for(int i = 0;i<4;i++){
+		switch (i){			//init each com line
+ 16c:	82 30       	cpi	r24, 0x02	; 2
+ 16e:	91 05       	cpc	r25, r1
+ 170:	79 f0       	breq	.+30     	; 0x190 <com_helper_init+0x96>
+ 172:	1c f4       	brge	.+6      	; 0x17a <com_helper_init+0x80>
+ 174:	01 97       	sbiw	r24, 0x01	; 1
+ 176:	39 f0       	breq	.+14     	; 0x186 <com_helper_init+0x8c>
+ 178:	1a c0       	rjmp	.+52     	; 0x1ae <com_helper_init+0xb4>
+ 17a:	83 30       	cpi	r24, 0x03	; 3
+ 17c:	91 05       	cpc	r25, r1
+ 17e:	69 f0       	breq	.+26     	; 0x19a <com_helper_init+0xa0>
+ 180:	04 97       	sbiw	r24, 0x04	; 4
+ 182:	81 f0       	breq	.+32     	; 0x1a4 <com_helper_init+0xaa>
+ 184:	14 c0       	rjmp	.+40     	; 0x1ae <com_helper_init+0xb4>
+			case 1:
+				
+				uart_init(&port[0]);
+ 186:	8b e9       	ldi	r24, 0x9B	; 155
+ 188:	91 e0       	ldi	r25, 0x01	; 1
+ 18a:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <uart_init>
+								
+				break; 
+ 18e:	eb cf       	rjmp	.-42     	; 0x166 <com_helper_init+0x6c>
+			case 2:
+				uart_init(&port[1]);
+ 190:	88 ec       	ldi	r24, 0xC8	; 200
+ 192:	91 e0       	ldi	r25, 0x01	; 1
+ 194:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <uart_init>
+				break;
+ 198:	e6 cf       	rjmp	.-52     	; 0x166 <com_helper_init+0x6c>
+			case 3:
+				uart_init(&port[2]);
+ 19a:	85 ef       	ldi	r24, 0xF5	; 245
+ 19c:	91 e0       	ldi	r25, 0x01	; 1
+ 19e:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <uart_init>
+				break;
+ 1a2:	08 c0       	rjmp	.+16     	; 0x1b4 <com_helper_init+0xba>
+			case 4:
+				uart_init(&port[3]);
+ 1a4:	82 e2       	ldi	r24, 0x22	; 34
+ 1a6:	92 e0       	ldi	r25, 0x02	; 2
+ 1a8:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <uart_init>
+				break;
+ 1ac:	03 c0       	rjmp	.+6      	; 0x1b4 <com_helper_init+0xba>
+	
+	port[3].uartrx = PORTFOURRX;		//right now, this pin is still wrong.
+	port[3].uarttx = PORTFOURTX; 
+	port[3].port_number = 4;
+	
+	for(int i = 0;i<4;i++){
+ 1ae:	c4 30       	cpi	r28, 0x04	; 4
+ 1b0:	d1 05       	cpc	r29, r1
+ 1b2:	cc f2       	brlt	.-78     	; 0x166 <com_helper_init+0x6c>
+				break;
+		}
+	}
+	
+	
+}
+ 1b4:	df 91       	pop	r29
+ 1b6:	cf 91       	pop	r28
+ 1b8:	08 95       	ret
+
+000001ba <do_what_needs_to_be_done>:
+
+
+//this is the main method for reading/writing
+
+//probably doesnt work right now, as interrupt has to be 4 times faster.
+void do_what_needs_to_be_done(uart_port *curr_port){
+ 1ba:	fc 01       	movw	r30, r24
+
+	if(curr_port->yeah){								//First of all, the debug led is lit if yeah==1.
+ 1bc:	81 81       	ldd	r24, Z+1	; 0x01
+ 1be:	88 23       	and	r24, r24
+ 1c0:	19 f0       	breq	.+6      	; 0x1c8 <do_what_needs_to_be_done+0xe>
+														//has to be improved to all ports
+		DDRB |= _BV(PINB3);
+ 1c2:	23 9a       	sbi	0x04, 3	; 4
+		PORTB |= _BV(PINB3);
+ 1c4:	2b 9a       	sbi	0x05, 3	; 5
+ 1c6:	01 c0       	rjmp	.+2      	; 0x1ca <do_what_needs_to_be_done+0x10>
+		
+	}
+	else{
+		PORTB &= ~_BV(PINB3);
+ 1c8:	2b 98       	cbi	0x05, 3	; 5
+	// since it needs to be somewhere close to accurate...
+	// then we read the incoming signal, if there is one,
+	// and finally we update the nearly-real-time clock
+	// (we never display the clock but it timestamps the output data)
+	
+	if (curr_port->uart_status & _BV(txbusy))
+ 1ca:	80 85       	ldd	r24, Z+8	; 0x08
+ 1cc:	80 ff       	sbrs	r24, 0
+ 1ce:	5d c0       	rjmp	.+186    	; 0x28a <do_what_needs_to_be_done+0xd0>
+	{
+		
+		// we're transmitting something
+		// increment the tick - we only do things every four ticks
+		curr_port->uart_txtick++;
+ 1d0:	84 81       	ldd	r24, Z+4	; 0x04
+ 1d2:	8f 5f       	subi	r24, 0xFF	; 255
+ 1d4:	84 83       	std	Z+4, r24	; 0x04
+		if (curr_port->uart_txtick == 4)
+ 1d6:	84 81       	ldd	r24, Z+4	; 0x04
+ 1d8:	84 30       	cpi	r24, 0x04	; 4
+ 1da:	09 f0       	breq	.+2      	; 0x1de <do_what_needs_to_be_done+0x24>
+ 1dc:	56 c0       	rjmp	.+172    	; 0x28a <do_what_needs_to_be_done+0xd0>
+		{
+			// okay, we've work to do
+			curr_port->uart_txtick = 0;
+ 1de:	14 82       	std	Z+4, r1	; 0x04
+			
+			// is it the start bit?
+			if (curr_port->uart_txbit == 0)
+ 1e0:	86 81       	ldd	r24, Z+6	; 0x06
+ 1e2:	81 11       	cpse	r24, r1
+ 1e4:	12 c0       	rjmp	.+36     	; 0x20a <do_what_needs_to_be_done+0x50>
+			{
+				// yes...
+				PORTD &= ~(_BV(curr_port->uarttx));		// clear the start bit output
+ 1e6:	4b b1       	in	r20, 0x0b	; 11
+ 1e8:	84 85       	ldd	r24, Z+12	; 0x0c
+ 1ea:	21 e0       	ldi	r18, 0x01	; 1
+ 1ec:	30 e0       	ldi	r19, 0x00	; 0
+ 1ee:	b9 01       	movw	r22, r18
+ 1f0:	02 c0       	rjmp	.+4      	; 0x1f6 <do_what_needs_to_be_done+0x3c>
+ 1f2:	66 0f       	add	r22, r22
+ 1f4:	77 1f       	adc	r23, r23
+ 1f6:	8a 95       	dec	r24
+ 1f8:	e2 f7       	brpl	.-8      	; 0x1f2 <do_what_needs_to_be_done+0x38>
+ 1fa:	cb 01       	movw	r24, r22
+ 1fc:	80 95       	com	r24
+ 1fe:	84 23       	and	r24, r20
+ 200:	8b b9       	out	0x0b, r24	; 11
+				curr_port->uart_txbit++;
+ 202:	86 81       	ldd	r24, Z+6	; 0x06
+ 204:	8f 5f       	subi	r24, 0xFF	; 255
+ 206:	86 83       	std	Z+6, r24	; 0x06
+ 208:	39 c0       	rjmp	.+114    	; 0x27c <do_what_needs_to_be_done+0xc2>
+			}
+			else
+			{
+				if (curr_port->uart_txbit != 9)
+ 20a:	86 81       	ldd	r24, Z+6	; 0x06
+ 20c:	89 30       	cpi	r24, 0x09	; 9
+ 20e:	31 f1       	breq	.+76     	; 0x25c <do_what_needs_to_be_done+0xa2>
+				{
+					// deal with the data bits
+					if (curr_port->uart_txd & 1){// low bit set?
+ 210:	83 81       	ldd	r24, Z+3	; 0x03
+ 212:	80 ff       	sbrs	r24, 0
+ 214:	0e c0       	rjmp	.+28     	; 0x232 <do_what_needs_to_be_done+0x78>
+						PORTD |= _BV(curr_port->uarttx);	// then set the data stream bit
+ 216:	4b b1       	in	r20, 0x0b	; 11
+ 218:	84 85       	ldd	r24, Z+12	; 0x0c
+ 21a:	21 e0       	ldi	r18, 0x01	; 1
+ 21c:	30 e0       	ldi	r19, 0x00	; 0
+ 21e:	b9 01       	movw	r22, r18
+ 220:	02 c0       	rjmp	.+4      	; 0x226 <do_what_needs_to_be_done+0x6c>
+ 222:	66 0f       	add	r22, r22
+ 224:	77 1f       	adc	r23, r23
+ 226:	8a 95       	dec	r24
+ 228:	e2 f7       	brpl	.-8      	; 0x222 <do_what_needs_to_be_done+0x68>
+ 22a:	cb 01       	movw	r24, r22
+ 22c:	84 2b       	or	r24, r20
+ 22e:	8b b9       	out	0x0b, r24	; 11
+ 230:	0e c0       	rjmp	.+28     	; 0x24e <do_what_needs_to_be_done+0x94>
+					}		
+					else{
+					PORTD &= ~(_BV(curr_port->uarttx));		//Here the tx pin is set as low. This doesnt work properly.
+ 232:	4b b1       	in	r20, 0x0b	; 11
+ 234:	84 85       	ldd	r24, Z+12	; 0x0c
+ 236:	21 e0       	ldi	r18, 0x01	; 1
+ 238:	30 e0       	ldi	r19, 0x00	; 0
+ 23a:	b9 01       	movw	r22, r18
+ 23c:	02 c0       	rjmp	.+4      	; 0x242 <do_what_needs_to_be_done+0x88>
+ 23e:	66 0f       	add	r22, r22
+ 240:	77 1f       	adc	r23, r23
+ 242:	8a 95       	dec	r24
+ 244:	e2 f7       	brpl	.-8      	; 0x23e <do_what_needs_to_be_done+0x84>
+ 246:	cb 01       	movw	r24, r22
+ 248:	80 95       	com	r24
+ 24a:	84 23       	and	r24, r20
+ 24c:	8b b9       	out	0x0b, r24	; 11
+					//PORTD &= ~(_BV(curr_port->uarttx));	//maybe we can set it low twice?
+					
+					}
+					
+					// or clear, as required
+					curr_port->uart_txbit++;				// increment the bit count
+ 24e:	86 81       	ldd	r24, Z+6	; 0x06
+ 250:	8f 5f       	subi	r24, 0xFF	; 255
+ 252:	86 83       	std	Z+6, r24	; 0x06
+					
+					// and shift the data right
+					curr_port->uart_txd /= 2;
+ 254:	83 81       	ldd	r24, Z+3	; 0x03
+ 256:	86 95       	lsr	r24
+ 258:	83 83       	std	Z+3, r24	; 0x03
+ 25a:	10 c0       	rjmp	.+32     	; 0x27c <do_what_needs_to_be_done+0xc2>
+				}
+				else
+				{
+					// deal with the stop bit (stop bit is allways on high.
+					PORTD |= _BV(curr_port->uarttx);
+ 25c:	4b b1       	in	r20, 0x0b	; 11
+ 25e:	84 85       	ldd	r24, Z+12	; 0x0c
+ 260:	21 e0       	ldi	r18, 0x01	; 1
+ 262:	30 e0       	ldi	r19, 0x00	; 0
+ 264:	b9 01       	movw	r22, r18
+ 266:	02 c0       	rjmp	.+4      	; 0x26c <do_what_needs_to_be_done+0xb2>
+ 268:	66 0f       	add	r22, r22
+ 26a:	77 1f       	adc	r23, r23
+ 26c:	8a 95       	dec	r24
+ 26e:	e2 f7       	brpl	.-8      	; 0x268 <do_what_needs_to_be_done+0xae>
+ 270:	cb 01       	movw	r24, r22
+ 272:	84 2b       	or	r24, r20
+ 274:	8b b9       	out	0x0b, r24	; 11
+					curr_port->uart_txbit++;
+ 276:	86 81       	ldd	r24, Z+6	; 0x06
+ 278:	8f 5f       	subi	r24, 0xFF	; 255
+ 27a:	86 83       	std	Z+6, r24	; 0x06
+					
+				}
+			}
+			
+			// and finally, if txbit is more than 9, we've done
+			if (curr_port->uart_txbit > 9)
+ 27c:	86 81       	ldd	r24, Z+6	; 0x06
+ 27e:	8a 30       	cpi	r24, 0x0A	; 10
+ 280:	20 f0       	brcs	.+8      	; 0x28a <do_what_needs_to_be_done+0xd0>
+			{
+				curr_port->uart_txbit = 0;					// clear the bit counter
+ 282:	16 82       	std	Z+6, r1	; 0x06
+				curr_port->uart_status &= ~(_BV(txbusy)); // and the busy status
+ 284:	80 85       	ldd	r24, Z+8	; 0x08
+ 286:	8e 7f       	andi	r24, 0xFE	; 254
+ 288:	80 87       	std	Z+8, r24	; 0x08
+	// if it has, we wait for half a bit period and then sample every four ticks
+	// to put together the rx data
+
+		
+
+	if ((curr_port->uart_status & _BV(rxbusy)) == 0)
+ 28a:	80 85       	ldd	r24, Z+8	; 0x08
+ 28c:	81 fd       	sbrc	r24, 1
+ 28e:	11 c0       	rjmp	.+34     	; 0x2b2 <do_what_needs_to_be_done+0xf8>
+	{
+		
+		// check to see if there's a start
+		if ((PIND & _BV(curr_port->uartrx)) == 0)
+ 290:	89 b1       	in	r24, 0x09	; 9
+ 292:	23 85       	ldd	r18, Z+11	; 0x0b
+ 294:	90 e0       	ldi	r25, 0x00	; 0
+ 296:	02 c0       	rjmp	.+4      	; 0x29c <do_what_needs_to_be_done+0xe2>
+ 298:	95 95       	asr	r25
+ 29a:	87 95       	ror	r24
+ 29c:	2a 95       	dec	r18
+ 29e:	e2 f7       	brpl	.-8      	; 0x298 <do_what_needs_to_be_done+0xde>
+ 2a0:	80 fd       	sbrc	r24, 0
+ 2a2:	57 c0       	rjmp	.+174    	; 0x352 <do_what_needs_to_be_done+0x198>
+			
+			
+			
+			// we found a start bit!
+			// set the tick count to 2, so we get the sample near the middle of the bit
+			curr_port->uart_rxtick = 2;
+ 2a4:	82 e0       	ldi	r24, 0x02	; 2
+ 2a6:	85 83       	std	Z+5, r24	; 0x05
+			// and flag that we're now busy
+			curr_port->uart_status |= _BV(rxbusy);
+ 2a8:	80 85       	ldd	r24, Z+8	; 0x08
+ 2aa:	82 60       	ori	r24, 0x02	; 2
+ 2ac:	80 87       	std	Z+8, r24	; 0x08
+			// we're expecting the start bit now...
+			curr_port->uart_rxbit = 0;
+ 2ae:	17 82       	std	Z+7, r1	; 0x07
+ 2b0:	08 95       	ret
+	else
+	{
+		
+		// we're receiving something
+		// inc the tick count
+		curr_port->uart_rxtick++;
+ 2b2:	85 81       	ldd	r24, Z+5	; 0x05
+ 2b4:	8f 5f       	subi	r24, 0xFF	; 255
+ 2b6:	85 83       	std	Z+5, r24	; 0x05
+		if (curr_port->uart_rxtick == 4)
+ 2b8:	85 81       	ldd	r24, Z+5	; 0x05
+ 2ba:	84 30       	cpi	r24, 0x04	; 4
+ 2bc:	09 f0       	breq	.+2      	; 0x2c0 <do_what_needs_to_be_done+0x106>
+ 2be:	49 c0       	rjmp	.+146    	; 0x352 <do_what_needs_to_be_done+0x198>
+		{
+			// we only sample when the tick = 0
+			curr_port->uart_rxtick = 0;
+ 2c0:	15 82       	std	Z+5, r1	; 0x05
+			
+			// what we do depends on the bit count
+			// 0 = start,
+			// 1-8 = data
+			// 9 = stop
+			if (curr_port->uart_rxbit == 0)
+ 2c2:	87 81       	ldd	r24, Z+7	; 0x07
+ 2c4:	81 11       	cpse	r24, r1
+ 2c6:	13 c0       	rjmp	.+38     	; 0x2ee <do_what_needs_to_be_done+0x134>
+			{
+				
+				// start bit
+				// it had better be 0 or it was a line glitch
+				if ((PIND & _BV(curr_port->uartrx)) == 0)
+ 2c8:	89 b1       	in	r24, 0x09	; 9
+ 2ca:	23 85       	ldd	r18, Z+11	; 0x0b
+ 2cc:	90 e0       	ldi	r25, 0x00	; 0
+ 2ce:	02 c0       	rjmp	.+4      	; 0x2d4 <do_what_needs_to_be_done+0x11a>
+ 2d0:	95 95       	asr	r25
+ 2d2:	87 95       	ror	r24
+ 2d4:	2a 95       	dec	r18
+ 2d6:	e2 f7       	brpl	.-8      	; 0x2d0 <do_what_needs_to_be_done+0x116>
+ 2d8:	80 fd       	sbrc	r24, 0
+ 2da:	05 c0       	rjmp	.+10     	; 0x2e6 <do_what_needs_to_be_done+0x12c>
+				{
+					// it's a real start bit (probably) so deal with it
+					// next bit will be data
+					curr_port->uart_rxbit ++;
+ 2dc:	87 81       	ldd	r24, Z+7	; 0x07
+ 2de:	8f 5f       	subi	r24, 0xFF	; 255
+ 2e0:	87 83       	std	Z+7, r24	; 0x07
+					curr_port->uart_rxd = 0;
+ 2e2:	12 82       	std	Z+2, r1	; 0x02
+ 2e4:	08 95       	ret
+				}
+				else
+				{
+					// bad start bit, flag us back as not busy
+					curr_port->uart_status |= ~(_BV(rxbusy));
+ 2e6:	80 85       	ldd	r24, Z+8	; 0x08
+ 2e8:	8d 6f       	ori	r24, 0xFD	; 253
+ 2ea:	80 87       	std	Z+8, r24	; 0x08
+ 2ec:	08 95       	ret
+				}
+			}
+			else
+			{
+				if (curr_port->uart_rxbit < 9)
+ 2ee:	87 81       	ldd	r24, Z+7	; 0x07
+ 2f0:	89 30       	cpi	r24, 0x09	; 9
+ 2f2:	b0 f4       	brcc	.+44     	; 0x320 <do_what_needs_to_be_done+0x166>
+				{
+					
+					// data bit
+					// if the data bit is a one, we add the bit value to the rxd value
+					
+					if (PIND & _BV(curr_port->uartrx))
+ 2f4:	89 b1       	in	r24, 0x09	; 9
+ 2f6:	23 85       	ldd	r18, Z+11	; 0x0b
+ 2f8:	90 e0       	ldi	r25, 0x00	; 0
+ 2fa:	02 c0       	rjmp	.+4      	; 0x300 <do_what_needs_to_be_done+0x146>
+ 2fc:	95 95       	asr	r25
+ 2fe:	87 95       	ror	r24
+ 300:	2a 95       	dec	r18
+ 302:	e2 f7       	brpl	.-8      	; 0x2fc <do_what_needs_to_be_done+0x142>
+ 304:	80 ff       	sbrs	r24, 0
+ 306:	08 c0       	rjmp	.+16     	; 0x318 <do_what_needs_to_be_done+0x15e>
+					{
+						curr_port->uart_rxd += uart_bitpattern[curr_port->uart_rxbit];
+ 308:	92 81       	ldd	r25, Z+2	; 0x02
+ 30a:	a7 81       	ldd	r26, Z+7	; 0x07
+ 30c:	b0 e0       	ldi	r27, 0x00	; 0
+ 30e:	a0 50       	subi	r26, 0x00	; 0
+ 310:	bf 4f       	sbci	r27, 0xFF	; 255
+ 312:	8c 91       	ld	r24, X
+ 314:	89 0f       	add	r24, r25
+ 316:	82 83       	std	Z+2, r24	; 0x02
+						
+					}
+					curr_port->uart_rxbit ++;
+ 318:	87 81       	ldd	r24, Z+7	; 0x07
+ 31a:	8f 5f       	subi	r24, 0xFF	; 255
+ 31c:	87 83       	std	Z+7, r24	; 0x07
+ 31e:	08 95       	ret
+				}
+				else
+				{
+					if (curr_port->uart_rxbit == 9)
+ 320:	87 81       	ldd	r24, Z+7	; 0x07
+ 322:	89 30       	cpi	r24, 0x09	; 9
+ 324:	21 f4       	brne	.+8      	; 0x32e <do_what_needs_to_be_done+0x174>
+					{
+						// stop bit
+						// we're going to assume it's a valid bit, though we could check for
+						// framing error here, and simply use this bit to wait for the first
+						// stop bit period
+						curr_port->uart_rxbit++;
+ 326:	87 81       	ldd	r24, Z+7	; 0x07
+ 328:	8f 5f       	subi	r24, 0xFF	; 255
+ 32a:	87 83       	std	Z+7, r24	; 0x07
+ 32c:	08 95       	ret
+					}
+					else
+					{
+						// finished, ready to start again
+						curr_port->uart_status &= ~(_BV(rxbusy));
+ 32e:	80 85       	ldd	r24, Z+8	; 0x08
+ 330:	8d 7f       	andi	r24, 0xFD	; 253
+ 332:	80 87       	std	Z+8, r24	; 0x08
+						// store the data into the buffer
+						curr_port->buffer2[curr_port->next_write_2++] = curr_port->uart_rxd;
+ 334:	82 85       	ldd	r24, Z+10	; 0x0a
+ 336:	91 e0       	ldi	r25, 0x01	; 1
+ 338:	98 0f       	add	r25, r24
+ 33a:	92 87       	std	Z+10, r25	; 0x0a
+ 33c:	92 81       	ldd	r25, Z+2	; 0x02
+ 33e:	df 01       	movw	r26, r30
+ 340:	a8 0f       	add	r26, r24
+ 342:	b1 1d       	adc	r27, r1
+ 344:	1d 96       	adiw	r26, 0x0d	; 13
+ 346:	9c 93       	st	X, r25
+						if(curr_port->uart_rxd == 0xF0){
+ 348:	82 81       	ldd	r24, Z+2	; 0x02
+							
+						}
+						if (curr_port->next_write_2 == BUFFERSIZE)
+ 34a:	82 85       	ldd	r24, Z+10	; 0x0a
+ 34c:	80 32       	cpi	r24, 0x20	; 32
+ 34e:	09 f4       	brne	.+2      	; 0x352 <do_what_needs_to_be_done+0x198>
+						curr_port->next_write_2 = 0;
+ 350:	12 86       	std	Z+10, r1	; 0x0a
+ 352:	08 95       	ret
+
+00000354 <__vector_11>:
+
+
+
+//this is called periodically, then our periodical routine is called to read/write on the current port, which is afterwards incremented.
+ISR(TIMER1_COMPA_vect) 
+{		
+ 354:	1f 92       	push	r1
+ 356:	0f 92       	push	r0
+ 358:	0f b6       	in	r0, 0x3f	; 63
+ 35a:	0f 92       	push	r0
+ 35c:	11 24       	eor	r1, r1
+ 35e:	2f 93       	push	r18
+ 360:	3f 93       	push	r19
+ 362:	4f 93       	push	r20
+ 364:	5f 93       	push	r21
+ 366:	6f 93       	push	r22
+ 368:	7f 93       	push	r23
+ 36a:	8f 93       	push	r24
+ 36c:	9f 93       	push	r25
+ 36e:	af 93       	push	r26
+ 370:	bf 93       	push	r27
+ 372:	ef 93       	push	r30
+ 374:	ff 93       	push	r31
+	
+			//DEBUG
+	 
+	switch (port_rotator){
+ 376:	80 91 9a 01 	lds	r24, 0x019A
+ 37a:	82 30       	cpi	r24, 0x02	; 2
+ 37c:	71 f0       	breq	.+28     	; 0x39a <__vector_11+0x46>
+ 37e:	18 f4       	brcc	.+6      	; 0x386 <__vector_11+0x32>
+ 380:	81 30       	cpi	r24, 0x01	; 1
+ 382:	31 f0       	breq	.+12     	; 0x390 <__vector_11+0x3c>
+ 384:	18 c0       	rjmp	.+48     	; 0x3b6 <__vector_11+0x62>
+ 386:	83 30       	cpi	r24, 0x03	; 3
+ 388:	69 f0       	breq	.+26     	; 0x3a4 <__vector_11+0x50>
+ 38a:	84 30       	cpi	r24, 0x04	; 4
+ 38c:	81 f0       	breq	.+32     	; 0x3ae <__vector_11+0x5a>
+ 38e:	13 c0       	rjmp	.+38     	; 0x3b6 <__vector_11+0x62>
+		case 1:
+			do_what_needs_to_be_done(&port[0]);
+ 390:	8b e9       	ldi	r24, 0x9B	; 155
+ 392:	91 e0       	ldi	r25, 0x01	; 1
+ 394:	0e 94 dd 00 	call	0x1ba	; 0x1ba <do_what_needs_to_be_done>
+			break;
+ 398:	0e c0       	rjmp	.+28     	; 0x3b6 <__vector_11+0x62>
+		case 2:
+			do_what_needs_to_be_done(&port[1]);
+ 39a:	88 ec       	ldi	r24, 0xC8	; 200
+ 39c:	91 e0       	ldi	r25, 0x01	; 1
+ 39e:	0e 94 dd 00 	call	0x1ba	; 0x1ba <do_what_needs_to_be_done>
+			break;
+ 3a2:	09 c0       	rjmp	.+18     	; 0x3b6 <__vector_11+0x62>
+		case 3:
+			do_what_needs_to_be_done(&port[2]);
+ 3a4:	85 ef       	ldi	r24, 0xF5	; 245
+ 3a6:	91 e0       	ldi	r25, 0x01	; 1
+ 3a8:	0e 94 dd 00 	call	0x1ba	; 0x1ba <do_what_needs_to_be_done>
+			break;
+ 3ac:	04 c0       	rjmp	.+8      	; 0x3b6 <__vector_11+0x62>
+		case 4:
+			do_what_needs_to_be_done(&port[3]);
+ 3ae:	82 e2       	ldi	r24, 0x22	; 34
+ 3b0:	92 e0       	ldi	r25, 0x02	; 2
+ 3b2:	0e 94 dd 00 	call	0x1ba	; 0x1ba <do_what_needs_to_be_done>
+			break;
+	}
+	
+	if(port_rotator == 4){ // <= rotate the port.
+ 3b6:	80 91 9a 01 	lds	r24, 0x019A
+ 3ba:	84 30       	cpi	r24, 0x04	; 4
+ 3bc:	21 f4       	brne	.+8      	; 0x3c6 <__vector_11+0x72>
+		port_rotator = 1;
+ 3be:	81 e0       	ldi	r24, 0x01	; 1
+ 3c0:	80 93 9a 01 	sts	0x019A, r24
+ 3c4:	05 c0       	rjmp	.+10     	; 0x3d0 <__vector_11+0x7c>
+	}
+	else{
+		port_rotator +=1;
+ 3c6:	80 91 9a 01 	lds	r24, 0x019A
+ 3ca:	8f 5f       	subi	r24, 0xFF	; 255
+ 3cc:	80 93 9a 01 	sts	0x019A, r24
+	}
+	
+	
+}
+ 3d0:	ff 91       	pop	r31
+ 3d2:	ef 91       	pop	r30
+ 3d4:	bf 91       	pop	r27
+ 3d6:	af 91       	pop	r26
+ 3d8:	9f 91       	pop	r25
+ 3da:	8f 91       	pop	r24
+ 3dc:	7f 91       	pop	r23
+ 3de:	6f 91       	pop	r22
+ 3e0:	5f 91       	pop	r21
+ 3e2:	4f 91       	pop	r20
+ 3e4:	3f 91       	pop	r19
+ 3e6:	2f 91       	pop	r18
+ 3e8:	0f 90       	pop	r0
+ 3ea:	0f be       	out	0x3f, r0	; 63
+ 3ec:	0f 90       	pop	r0
+ 3ee:	1f 90       	pop	r1
+ 3f0:	18 95       	reti
+
+000003f2 <uart_init>:
+	
+	
+//will be executed multiple times during startup, but who cares.
+
+void uart_init (uart_port *curr_port)
+{
+ 3f2:	cf 93       	push	r28
+ 3f4:	df 93       	push	r29
+ 3f6:	fc 01       	movw	r30, r24
+	
+	
+	curr_port->next_write_2 = 0;	// set up the buffer pointers
+ 3f8:	12 86       	std	Z+10, r1	; 0x0a
+	curr_port->next_read_2 = 0;
+ 3fa:	11 86       	std	Z+9, r1	; 0x09
+	
+	curr_port->yeah = 0;			//set up debug char
+ 3fc:	11 82       	std	Z+1, r1	; 0x01
+	
+	// we wake up the timer, preset the clock and uart variables, and enable the ocr1a interrupt
+
+	
+	TCCR1B = 0;					//resetting TCCR1B.
+ 3fe:	a1 e8       	ldi	r26, 0x81	; 129
+ 400:	b0 e0       	ldi	r27, 0x00	; 0
+ 402:	1c 92       	st	X, r1
+	TCCR1B |= _BV(CS10);		//clock enabled, prescaling = 1
+ 404:	8c 91       	ld	r24, X
+ 406:	81 60       	ori	r24, 0x01	; 1
+ 408:	8c 93       	st	X, r24
+	TCCR1B |= _BV(WGM12);		// ctc mode is enabled
+ 40a:	8c 91       	ld	r24, X
+ 40c:	88 60       	ori	r24, 0x08	; 8
+ 40e:	8c 93       	st	X, r24
+	TCCR1A = 0;					//nothing special is used.
+ 410:	10 92 80 00 	sts	0x0080, r1
+	
+	OCR1AH = 0x03;				//for four connections at the same time: has to be D0
+ 414:	c9 e8       	ldi	r28, 0x89	; 137
+ 416:	d0 e0       	ldi	r29, 0x00	; 0
+ 418:	83 e0       	ldi	r24, 0x03	; 3
+ 41a:	88 83       	st	Y, r24
+	OCR1AL = 0x41;				//The compare A value is set, right now it is the value it used to be for only one port, has to be four times higher.
+ 41c:	a8 e8       	ldi	r26, 0x88	; 136
+ 41e:	b0 e0       	ldi	r27, 0x00	; 0
+ 420:	81 e4       	ldi	r24, 0x41	; 65
+ 422:	8c 93       	st	X, r24
+		
+	OCR1AH = 0x00;
+ 424:	18 82       	st	Y, r1
+	OCR1AL = 0xD0;
+ 426:	80 ed       	ldi	r24, 0xD0	; 208
+ 428:	8c 93       	st	X, r24
+	//OCR1AH = 0x01;				//bullshit numbers
+	//OCR1AL = 0x59;
+		
+		
+	
+	TIMSK1 |= _BV(OCIE1A);		//Timer/Counter Compare Match is enabled.
+ 42a:	af e6       	ldi	r26, 0x6F	; 111
+ 42c:	b0 e0       	ldi	r27, 0x00	; 0
+ 42e:	8c 91       	ld	r24, X
+ 430:	82 60       	ori	r24, 0x02	; 2
+ 432:	8c 93       	st	X, r24
+	
+	
+	
+	curr_port->uart_status = 0;		// nothing happening either tx or rx
+ 434:	10 86       	std	Z+8, r1	; 0x08
+	
+	//Here, the ports are set and the pullups configured. This implementation worked with one port, maybe changes have to be made so that we only edit "our" pin as a initializing port.
+	
+	
+	DDRD = _BV(curr_port->uarttx);		// and set the input and output pins
+ 436:	24 85       	ldd	r18, Z+12	; 0x0c
+ 438:	81 e0       	ldi	r24, 0x01	; 1
+ 43a:	90 e0       	ldi	r25, 0x00	; 0
+ 43c:	ac 01       	movw	r20, r24
+ 43e:	02 c0       	rjmp	.+4      	; 0x444 <uart_init+0x52>
+ 440:	44 0f       	add	r20, r20
+ 442:	55 1f       	adc	r21, r21
+ 444:	2a 95       	dec	r18
+ 446:	e2 f7       	brpl	.-8      	; 0x440 <uart_init+0x4e>
+ 448:	4a b9       	out	0x0a, r20	; 10
+	
+	PORTD |= _BV(curr_port->uarttx);		// we're not using port d for anything else and
+ 44a:	4b b1       	in	r20, 0x0b	; 11
+ 44c:	24 85       	ldd	r18, Z+12	; 0x0c
+ 44e:	bc 01       	movw	r22, r24
+ 450:	02 c0       	rjmp	.+4      	; 0x456 <uart_init+0x64>
+ 452:	66 0f       	add	r22, r22
+ 454:	77 1f       	adc	r23, r23
+ 456:	2a 95       	dec	r18
+ 458:	e2 f7       	brpl	.-8      	; 0x452 <uart_init+0x60>
+ 45a:	9b 01       	movw	r18, r22
+ 45c:	24 2b       	or	r18, r20
+ 45e:	2b b9       	out	0x0b, r18	; 11
+	
+	PORTD |= _BV(curr_port->uartrx);	// the usart overrides the pin directions anyway, here the pull up resistor on the rx port is enabled.
+ 460:	2b b1       	in	r18, 0x0b	; 11
+ 462:	33 85       	ldd	r19, Z+11	; 0x0b
+ 464:	02 c0       	rjmp	.+4      	; 0x46a <uart_init+0x78>
+ 466:	88 0f       	add	r24, r24
+ 468:	99 1f       	adc	r25, r25
+ 46a:	3a 95       	dec	r19
+ 46c:	e2 f7       	brpl	.-8      	; 0x466 <uart_init+0x74>
+ 46e:	82 2b       	or	r24, r18
+ 470:	8b b9       	out	0x0b, r24	; 11
+
+}
+ 472:	df 91       	pop	r29
+ 474:	cf 91       	pop	r28
+ 476:	08 95       	ret
+
+00000478 <uart_out_char>:
+
+void uart_out_char (char ch, uart_port *curr_port)
+{
+ 478:	fb 01       	movw	r30, r22
+	// output the character to the software serial port, waiting until the output
+	// buffer is available
+	
+	while ((curr_port->uart_status & _BV(txbusy)) == 1);		// wait...
+ 47a:	90 85       	ldd	r25, Z+8	; 0x08
+ 47c:	90 fd       	sbrc	r25, 0
+ 47e:	fd cf       	rjmp	.-6      	; 0x47a <uart_out_char+0x2>
+	{
+		// once the system isn't busy...
+		// load the register
+		curr_port->uart_txd = ch;
+ 480:	83 83       	std	Z+3, r24	; 0x03
+		
+		// and tell it there's something to send
+		curr_port->uart_status |= _BV(txbusy);
+ 482:	80 85       	ldd	r24, Z+8	; 0x08
+ 484:	81 60       	ori	r24, 0x01	; 1
+ 486:	80 87       	std	Z+8, r24	; 0x08
+ 488:	08 95       	ret
+
+0000048a <uart_ischar>:
+{
+	// returns true if there is a character available from the soft uart
+	// false if there is nothing waiting
+	// call ser2_in after this to retrieve the data
+	
+	if (curr_port->next_read_2 != curr_port->next_write_2)
+ 48a:	fc 01       	movw	r30, r24
+ 48c:	21 85       	ldd	r18, Z+9	; 0x09
+ 48e:	92 85       	ldd	r25, Z+10	; 0x0a
+ 490:	81 e0       	ldi	r24, 0x01	; 1
+ 492:	29 13       	cpse	r18, r25
+ 494:	01 c0       	rjmp	.+2      	; 0x498 <uart_ischar+0xe>
+ 496:	80 e0       	ldi	r24, 0x00	; 0
+	return 1;
+	else
+	return 0;
+}
+ 498:	08 95       	ret
+
+0000049a <uart_get_char>:
+
+
+//reads this char. Argument in both methods: a port struct, this struct contains the buffer object where the char is read from (if it exists).
+char uart_get_char (uart_port *curr_port)
+{
+ 49a:	fc 01       	movw	r30, r24
+	// return a character from the soft uart
+	// do *not* call without first testing with ser2_ischar as it modifies the
+	// next_read pointer
+	
+	char ch;
+	ch = curr_port->buffer2[curr_port->next_read_2++];
+ 49c:	81 85       	ldd	r24, Z+9	; 0x09
+ 49e:	91 e0       	ldi	r25, 0x01	; 1
+ 4a0:	98 0f       	add	r25, r24
+ 4a2:	91 87       	std	Z+9, r25	; 0x09
+ 4a4:	df 01       	movw	r26, r30
+ 4a6:	a8 0f       	add	r26, r24
+ 4a8:	b1 1d       	adc	r27, r1
+ 4aa:	1d 96       	adiw	r26, 0x0d	; 13
+ 4ac:	8c 91       	ld	r24, X
+	if (curr_port->next_read_2 == BUFFERSIZE)
+ 4ae:	91 85       	ldd	r25, Z+9	; 0x09
+ 4b0:	90 32       	cpi	r25, 0x20	; 32
+ 4b2:	09 f4       	brne	.+2      	; 0x4b6 <uart_get_char+0x1c>
+	curr_port->next_read_2 = 0;
+ 4b4:	11 86       	std	Z+9, r1	; 0x09
+	return ch;
+}
+ 4b6:	08 95       	ret
+
+000004b8 <_exit>:
+ 4b8:	f8 94       	cli
+
+000004ba <__stop_program>:
+ 4ba:	ff cf       	rjmp	.-2      	; 0x4ba <__stop_program>
